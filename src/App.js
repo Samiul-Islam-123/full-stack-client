@@ -1,24 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import LandingPage from "./Pages/Public/LandingPage/LandingPage.jsx"
+import { Routes, Route } from "react-router-dom"
+import { createTheme } from "@mui/material/styles";
+import {CssBaseline,Container, ThemeProvider} from "@mui/material"
+import NavBar from "./Components/NavBar/NavBar.jsx";
+import RouteController from "./Controllers/RouteController.jsx";
+
+//custom theme
+const theme = createTheme({
+  palette: {
+    mode: "dark",
+    primary: {
+      main: "#fff3e0"
+    },
+    secondary: {
+      main: "#FFD700"
+    }
+  }
+})
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      
+
+
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+
+        <NavBar />
+        
+        <RouteController />
+      </ThemeProvider>
+      
+   
+    </>
   );
 }
 
