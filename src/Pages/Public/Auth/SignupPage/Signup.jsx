@@ -43,7 +43,7 @@ export default function Signup() {
             const username = firstName + ' ' + lastName
 
             //performing signup action
-            const res = await axios.post(`${process.env.REACT_APP_API_URL}/authentication/signup`, {
+            const res = await axios.post(`${process.env.REACT_APP_API_URL}/auth/manual/signup`, {
                 username: username,
                 email: email,
                 password: password

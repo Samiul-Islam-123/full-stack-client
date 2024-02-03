@@ -1,60 +1,36 @@
-import React, { useEffect, useState } from 'react'
-import { Route, Routes } from 'react-router-dom'
-import LandingPage from '../Pages/Public/LandingPage/LandingPage'
-import Services from '../Pages/Private/Services/Services'
-import AppController from '../Pages/Private/Apps/AppController'
-import Cookies from "js-cookie"
-import SignUp from '../Pages/Public/Auth/SignupPage/Signup'
-import { Typography } from '@mui/material'
-import Login from '../Pages/Public/Auth/LoginPage/Login'
-import PasswordReset from '../Pages/Public/Auth/PasswordResetPage/PasswordReset'
-import PasswordResetVerification from '../Pages/Public/Auth/PasswordResetPage/PasswordResetVerification'
+import React, { useEffect, useState } from 'react';
+import { Route, Routes, Navigate, useNavigate } from 'react-router-dom';
+import LandingPage from '../Pages/Public/LandingPage/LandingPage';
+import AppController from '../Pages/Private/Apps/AppController';
+import Cookies from 'js-cookie';
+import SignUp from '../Pages/Public/Auth/SignupPage/Signup';
+import { Typography } from '@mui/material';
+import Login from '../Pages/Public/Auth/LoginPage/Login';
+import PasswordReset from '../Pages/Public/Auth/PasswordResetPage/PasswordReset';
+import PasswordResetVerification from '../Pages/Public/Auth/PasswordResetPage/PasswordResetVerification';
+import OTPVerification from '../Pages/Public/Auth/OTP/OTPVerification';
+import FreelanceMarketPlace from '../Pages/Private/Apps/FreelanceMarketPlace/FreelanceMarketPlace';
+import VideoCalling from '../Pages/Private/Apps/VideoCalling/VideoCalling';
+import VideoStreaming from '../Pages/Private/Apps/VideoStreaming/VideoStreaming';
+import ProjectManagement from '../Pages/Private/Apps/ProjectManagement/ProjectManagement';
+import Dashboard from '../Pages/Private/Apps/Dashboard/Dashboard';
 
 function RouteController() {
 
-    
-    const [allowed, setAllowed] = useState(false);
-
-    const CheckAuth = () => {
-        //this function will check authentication
-        const token = Cookies.get('access_token');
-        if (!token)
-            setAllowed(false);
-
-        else
-            setAllowed(true)
-    }
-
-    useEffect(() => {
-        CheckAuth()
-    }, [])
-
     return (
         <>
-
             <Routes>
-                <Route exact path='/' element={<LandingPage />} />
-                <Route exact path='/services' element={<Services />} />
-                <Route exact path='/signup' element={<SignUp />} />
-                <Route exact path='/login' element={<Login />} />
-                <Route exact path='/password-reset' element={<PasswordReset />} />
-                <Route exact path='/password-reset/verification' element={<PasswordResetVerification />} />
+                <Route exact path="/" element={<LandingPage />} />
 
-
-
-
-                <Route exact path='/apps' element={
-                    allowed ? (<AppController />) : (<><Typography variant='h1'>
-                            Sorry , you are not allowed :(
-                        </Typography></>)
-                } />
-
-                   
-                
+                <Route exact path="/signup" element={<SignUp />} />
+                <Route exact path="/login" element={<Login />} />
+                <Route exact path="/password-reset" element={<PasswordReset />} />
+                <Route exact path="/otp-verification/:email" element={<OTPVerification />} />
+                <Route exact path="/password-reset/verification" element={<PasswordResetVerification />} />
+                <Route exact path="/apps/*" element={<AppController />} />
             </Routes>
-
         </>
-    )
+    );
 }
 
-export default RouteController
+export default RouteController;

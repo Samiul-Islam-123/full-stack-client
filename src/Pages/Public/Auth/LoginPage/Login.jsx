@@ -38,7 +38,8 @@ export default function Login() {
         //checking for all fields
         if (email != '' && password != '') {
             //proceed further
-            const res = await axios.post(`${process.env.REACT_APP_API_URL}/authentication/login`, {
+            console.log(`${process.env.REACT_APP_API_URL}/auth/manual/login`)
+            const res = await axios.post(`${process.env.REACT_APP_API_URL}/auth/manual/login`, {
                 email: email,
                 password: password
             })

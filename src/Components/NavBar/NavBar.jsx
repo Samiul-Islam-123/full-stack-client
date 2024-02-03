@@ -3,56 +3,67 @@ import React from 'react';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { useNavigate } from 'react-router-dom';
 import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
+import ControlBar from '../Drawer/ControlBar';
+import DensityMediumIcon from '@mui/icons-material/DensityMedium';
+
 
 function NavBar() {
 
     const navigate = useNavigate();
 
-  return (
-    <>
-        <Toolbar>
-            <Typography variant='h4' style={{
-                flexGrow : "0.96"
-            }}>
-                TB
-            </Typography>
+    return (
+        <>
+            <Toolbar>
+                <ControlBar>
+                    <IconButton>
+                        <Icon>
+                            <DensityMediumIcon />
+                        </Icon>
+                    </IconButton>
+                </ControlBar>
 
-            <Button color='primary' onClick={()=>{
-                navigate('/')
-            }}>
-                Home
-            </Button>
+                <Typography variant='h4' style={{
+                    flexGrow: "0.96"
+                }}>
+                    TB
+                </Typography>
 
-            <Button onClick={()=>{
-                navigate('/services')
-            }}>
-                Services
-            </Button>
+                <Button color='primary' onClick={() => {
+                    navigate('/')
+                }}>
+                    Home
+                </Button>
 
-            <Button onClick={()=>{
-                navigate('/aboutus')
-            }}>
-                About Us
-            </Button>
+                <Button onClick={() => {
+                    navigate('/apps/dashboard')
+                }}>
+                    Apps
+                </Button>
 
-            <IconButton onClick={()=>{
-                navigate('/ai')
-            }}>
-                <Icon>
-                    <AutoAwesomeIcon />
-                </Icon>
-            </IconButton>
+                <Button onClick={() => {
+                    navigate('/aboutus')
+                }}>
+                    About Us
+                </Button>
 
-            <IconButton onClick={()=>{
-                navigate('/profile')
-            }}>
-                <Icon>
-                    <AccountCircleIcon />
-                </Icon>
-            </IconButton>
-        </Toolbar>
-    </>
-  )
+                <IconButton onClick={() => {
+                    navigate('/ai')
+                }}>
+                    <Icon>
+                        <AutoAwesomeIcon />
+                    </Icon>
+                </IconButton>
+
+                <IconButton onClick={() => {
+                    navigate('/profile')
+                }}>
+                    <Icon>
+                        <AccountCircleIcon />
+                    </Icon>
+                </IconButton>
+            </Toolbar>
+        </>
+    )
 }
 
 export default NavBar

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { Grid, Typography } from "@mui/material";
+import { Button, Grid, Typography } from "@mui/material";
+import { useNavigate} from 'react-router-dom';
 
 const phrases = [
     {
@@ -21,17 +22,19 @@ const phrases = [
         title : "project_management",
         phrase : "Where organization meets efficiency in project management."
     }
-]
+];
 
 function Heros() {
 
     const [currentPhrase, setCurrentPhrase] = useState("where innovation meets collaboration! ");
-    
+    const navigate = useNavigate();
 
     const AnimateWord = (text) => {
         const words = text.split(' ');
         let currentWord = 0;
         let currentLetter = 0;
+
+    
     
         const interval = setInterval(() => {
             setCurrentPhrase(prevPhrase => {
@@ -83,6 +86,13 @@ function Heros() {
                             <Typography variant='h6'>
                                 {currentPhrase}
                             </Typography>
+                            <Button variant='outlined' style={{
+                                marginTop : "10px"
+                            }} onClick={()=>{
+                                navigate('/apps/dashboard')
+                            }}>
+                                Get Started
+                            </Button>
                         </div>
                     </Grid>
 
