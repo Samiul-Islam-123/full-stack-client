@@ -28,6 +28,7 @@ function RouteController() {
                 <Route exact path="/otp-verification/:email" element={<OTPVerification />} />
                 <Route exact path="/password-reset/verification" element={<PasswordResetVerification />} />
                 <Route exact path="/apps/*" element={<AppController />} />
+                
             </Routes>
         </>
     );

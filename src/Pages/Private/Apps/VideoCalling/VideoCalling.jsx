@@ -44,27 +44,14 @@ function VideoCalling() {
     }, 60); // You can adjust the interval duration (in milliseconds) for the typing speed
 };
 
-const handleCreateRoom = ()=>{
-    socket.emit('create-room-request');
-}
 
-const handleJoinRoom = (roomID)=>{
-  socket.emit('join-room-request',(roomID));
-}
-
-useEffect(()=>{
-  socket.on('create-room-response', data=>{
-   navigate(`${data.roomID}`)
-  })
-
-  socket.on('join-room-response', data=>{
-    console.log(data)
-    navigate(`${data.rom}`)
-  })
-},[])
 
 useEffect(()=>{
     AnimateWord(currentPhrase)
+   
+     socket.on('new-meeting_response', data=>{
+       navigate(data.RoomID)
+     })
 },[])
 
   return (
@@ -106,36 +93,12 @@ useEffect(()=>{
           marginTop: "100px",
         }}>
           <Button variant='outlined' style={{ marginBottom: '10px' }} onClick={()=>{
-            handleCreateRoom();
-            //navigate('id123')
-          }}>Create Meeting Room</Button>
-          {
-            showTextField ? (<>
-            <div style={{
-              display : "flex",
-              justifyContent : "space-between"
-            }}>
-
-                <TextField variant='outlined'
-                onChange={(e)=>{
-                  setCurrentRoomID(e.target.value)
-                }}
-                fullWidth
-                label="Enter room ID"/>
-
-                <Button variant='outlined' onClick={()=>{
-                  handleJoinRoom(currentRoomID)
-                }}>
-                  Join
-                </Button>
-                </div>
-            </>) : (<>
-              <Button variant='outlined' onClick={()=>{
-                setTextField(true)
-              }}>Join Meeting Room</Button>
+            socket.emit('new-meeting_request', {
+              name : "Samiul"
+            })
             
-            </>)
-          }
+          }}>Create new Meeting</Button>
+          
         </div>
 
           </div>
