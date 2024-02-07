@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import { Route, Routes, useNavigate, useNavigation } from 'react-router-dom'
 import FreelanceMarketPlace from './FreelanceMarketPlace/FreelanceMarketPlace'
-import VideoStreaming from './VideoStreaming/VideoStreaming'
 import VideoCalling from './VideoCalling/VideoCalling'
 import ProjectManagement from './ProjectManagement/ProjectManagement';
 import Cookies from 'js-cookie'
@@ -10,10 +9,9 @@ import ControlBar from '../../../Components/Drawer/ControlBar'
 import { Icon, IconButton } from '@mui/material'
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import MeetingScreen from './VideoCalling/MeetingScreen'
-import LikedVideos from './VideoStreaming/LikedVideos'
-import MyVideos from './VideoStreaming/MyVideos'
-import UploadVideo from './VideoStreaming/UploadVideo'
+
 import Genius from './Genius/Genius'
+import VideoStreaming from './VideoStreaming/VideoStreaming';
 
 function AppController() {
 
@@ -38,10 +36,8 @@ function AppController() {
         <Route path="/marketplace" element={<FreelanceMarketPlace />} />
         
         
-        <Route exact path="/video-stream" element={<VideoStreaming />} />
-        <Route exact path="/video-stream/liked-video" element={<LikedVideos />} />
-        <Route exact path="/video-stream/my-video" element={<MyVideos />} />
-        <Route exact path="/video-stream/upload-video" element={<UploadVideo />} />
+        <Route exact path="/video-stream/*" element={<VideoStreaming />} />
+
         
 
         <Route path="/video-call" element={<VideoCalling />} />

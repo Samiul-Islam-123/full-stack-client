@@ -13,6 +13,9 @@ const navigate = useNavigate();
         <Toolbar style={{ display: 'flex', justifyContent: 'center' }}>
             
 
+        <Button onClick={()=>{
+                navigate('feed')
+            }}>feed</Button>
             <Button onClick={()=>{
                 navigate('my-video')
             }}>MY Videos</Button>

@@ -1,9 +1,7 @@
 import React from 'react'
 
-function LikedVideos() {
+export default function LikedVideos() {
   return (
     <div>LikedVideos</div>
   )
 }
-
-export default LikedVideos

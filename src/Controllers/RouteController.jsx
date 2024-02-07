@@ -9,11 +9,7 @@ import Login from '../Pages/Public/Auth/LoginPage/Login';
 import PasswordReset from '../Pages/Public/Auth/PasswordResetPage/PasswordReset';
 import PasswordResetVerification from '../Pages/Public/Auth/PasswordResetPage/PasswordResetVerification';
 import OTPVerification from '../Pages/Public/Auth/OTP/OTPVerification';
-import FreelanceMarketPlace from '../Pages/Private/Apps/FreelanceMarketPlace/FreelanceMarketPlace';
-import VideoCalling from '../Pages/Private/Apps/VideoCalling/VideoCalling';
-import VideoStreaming from '../Pages/Private/Apps/VideoStreaming/VideoStreaming';
-import ProjectManagement from '../Pages/Private/Apps/ProjectManagement/ProjectManagement';
-import Dashboard from '../Pages/Private/Apps/Dashboard/Dashboard';
+
 
 function RouteController() {
 
