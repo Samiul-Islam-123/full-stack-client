@@ -53,17 +53,17 @@ function UploadVideo() {
     formData.append('description', description);
 
     try {
-        const requestData = {
-            token: token
-        };
-      const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/video-stream/upload`, formData, 
-      requestData
-      ,{
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-        
-      });
+      const requestData = {
+        token: token
+      };
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/video-stream/upload`, formData,
+        requestData
+        , {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+
+        });
       console.log(response.data); // Handle response from server
     } catch (error) {
       console.error('Error uploading video:', error);
@@ -74,7 +74,7 @@ function UploadVideo() {
   return (
     <Container>
 
-<Backdrop
+      <Backdrop
         sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
         open={loading}
       >
@@ -94,7 +94,7 @@ function UploadVideo() {
             {selectedVideo && (
               <Typography variant="caption">{selectedVideo.name}</Typography>
             )}
-            
+
           </div>
           <div style={{ display: 'flex', justifyContent: 'space-between' }}>
             <Button variant="outlined" component="label">
@@ -125,7 +125,7 @@ function UploadVideo() {
             value={description}
             onChange={handleDescriptionChange}
           />
-          
+
           {/* Add your logic for upload functionality here */}
           <Button
             variant="contained"

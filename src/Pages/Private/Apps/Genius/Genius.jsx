@@ -1,4 +1,4 @@
-import { Container, Typography, Paper } from '@mui/material';
+import { Container, Typography, Paper, Card, CardContent, TextField } from '@mui/material';
 import React from 'react';
 
 function Genius() {
@@ -10,30 +10,34 @@ function Genius() {
   ];
 
   return (
-    <Container>
-      <Typography variant="h4" align="center">
-        Talk to Genius
+    <Container style={{ minHeight: '90vh', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+      <Typography variant="h4" align="center" marginBottom={"10px"}>
+        Talk with Genius
       </Typography>
-      <div style={{ marginTop: '20px', textAlign: 'center' }}>
-        {messages.map((message, index) => (
-          <Paper
-            key={index}
-            style={{
-              maxWidth: '70%',
-              margin: '0 auto',
-              padding: '10px',
-              borderRadius: '10px',
-              backgroundColor:
-                message.sender === 'Genius' ? '#f0f0f0' : '#c0c0c0',
-              textAlign: message.sender === 'Genius' ? 'left' : 'right',
-              color: '#000', // Set text color to black
-            }}
-            elevation={3}
-          >
-            <Typography variant="body1">{message.text}</Typography>
-          </Paper>
-        ))}
+      <div style={{
+        height : "80vh",
+        overflow : "auto"
+      }}>
+      <Card style={{
+      width : "fit-content",
+      padding : "5px"
+     }}>
+      <CardContent>
+        <Typography variant='h7'>
+          this is Genius's message 
+        </Typography>
+      </CardContent>
+     </Card>
+
+    
+
+
       </div>
+      <TextField
+        label="Ask anything to Genius"
+        fullWidth
+        style={{ marginBottom: '20px' }}
+      />
     </Container>
   );
 }

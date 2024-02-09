@@ -43,7 +43,7 @@ function AppController() {
         <Route path="/video-call" element={<VideoCalling />} />
         <Route path="/video-call/:id" element={<MeetingScreen />} />
         
-        <Route path="/project-management" element={<ProjectManagement />} />
+        <Route path="/project-management/*" element={<ProjectManagement />} />
 
         <Route path="/genius" element={<Genius />} />
 
