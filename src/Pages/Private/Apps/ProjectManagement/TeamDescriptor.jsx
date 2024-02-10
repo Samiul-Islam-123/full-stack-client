@@ -10,9 +10,11 @@ import AddIcon from '@mui/icons-material/Add';
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import SearchMember from './SearchMember';
+import { useSocket } from '../../../../Context/SocketProvider';
 
 function TeamDescriptor() {
 
+    const socket = useSocket();
     const navigate = useNavigate();
     const { TeamData, updateTeamData } = useTeamDataContext(); // Use the context
     const [value, setValue] = useState(null);
@@ -25,7 +27,7 @@ function TeamDescriptor() {
 
     const fetchTeamData = async () => {
         try {
-               const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/project-management/get-teams-id/${teamID}`);
+            const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/project-management/get-teams-id/${teamID}`);
 
             console.log(res)
             if (res.data.success === true) {
@@ -45,56 +47,62 @@ function TeamDescriptor() {
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
-      };
+    };
 
     useEffect(() => {
         //get the team data as per the given _id
 
         if (teamData) {
             const foundTeam = teamData.find(team => team._id === teamID);
-console.log('am here')
+            console.log('am here')
             setCurrentTeam(foundTeam);
         }
 
         else {
             fetchTeamData();
         }
-    },[])
+    }, [])
+
+    useEffect(()=>{
+        socket.on('response-join-team', data=>{
+            fetchTeamData()
+        })   
+    },[socket])
 
     return (
         <>
 
             {
                 currentTeam ? (<>
-                
-                <IconButton style={{
-                    marginLeft : "70vw",
-                    marginBottom : "10px"
-                }} 
-                onClick={()=>{
-                    setSearchMember(!searchMember)
-                }}
+
+                    <IconButton style={{
+                        marginLeft: "70vw",
+                        marginBottom: "10px"
+                    }}
+                        onClick={() => {
+                            setSearchMember(!searchMember)
+                        }}
                     >
-                    <Icon>
-                        <AddIcon />
-                    </Icon>
-                </IconButton>
-                Add member
+                        <Icon>
+                            <AddIcon />
+                        </Icon>
+                    </IconButton>
+                    Add member
 
-{
-                searchMember ? (<>
-                    <SearchMember />
-                </>) : null
-}
+                    {
+                        searchMember ? (<>
+                            <SearchMember TeamID={teamID} />
+                        </>) : null
+                    }
 
 
-                    <TeamBanner 
-                        TeamName = {currentTeam.TeamName}
-                        TeamBannerURL = {currentTeam.TeamBannerURL}
-                        TeamDescription = {currentTeam.TeamDescription}
+                    <TeamBanner
+                        TeamName={currentTeam.TeamName}
+                        TeamBannerURL={currentTeam.TeamBannerURL}
+                        TeamDescription={currentTeam.TeamDescription}
                     />
-                    <TeamMembers 
-                    Members = {currentTeam.Members}
+                    <TeamMembers
+                        Members={currentTeam.Members}
                     />
                     <Productivity />
                 </>) : (<>

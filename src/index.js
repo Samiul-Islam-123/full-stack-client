@@ -2,19 +2,24 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {BrowserRouter} from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import { TeamDataProvider } from './Context/TeamDataProvider';
+import { SocketProvider } from './Context/SocketProvider';
+import { NotificationProvider } from './Context/NotificationProvider';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 
     <BrowserRouter>
-    <TeamDataProvider>
-
-    <App />
-    </TeamDataProvider>
+        <SocketProvider url={process.env.REACT_APP_API_URL}>
+            <NotificationProvider>
+                <TeamDataProvider>
+                    <App />
+                </TeamDataProvider>
+            </NotificationProvider>
+        </SocketProvider>
     </BrowserRouter>
-  
+
 );
 
 // If you want to start measuring performance in your app, pass a function

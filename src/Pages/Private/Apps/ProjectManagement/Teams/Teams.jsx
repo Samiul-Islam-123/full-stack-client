@@ -9,9 +9,11 @@ import { useNavigate } from "react-router-dom"
 import { useTeamDataContext } from '../../../../../Context/TeamDataProvider';
 import CircularProgress from '@mui/material/CircularProgress';
 import Backdrop from '@mui/material/Backdrop';
-
+import { useSocket } from '../../../../../Context/SocketProvider';
 
 function Teams() {
+  const socket = useSocket();
+
   const [loading, setLoading] = useState(false);
   const [teamData, setTeamData] = useState(null);
   const [value, setValue] = useState(null);
@@ -22,43 +24,51 @@ function Teams() {
 
   const handleChange = (event, newValue) => {
 
-    if(newValue === 'Create new Team')
-    navigate('create-team')
+    if (newValue === 'Create new Team')
+      navigate('create-team')
 
-    else{
+    else {
 
       const foundValue = teamData.find(team => (newValue === team.TeamName));
       navigate(foundValue._id)
       setValue(newValue);
     }
   };
+  const fetchTeamData = async () => {
+    setLoading(true)
+    try {
+      const token = Cookies.get('access_token');
+      const headers = { Authorization: token };
+      const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/project-management/get-teams`, { headers });
+
+      if (res.data.success === true) {
+        updateTeamData(res.data.MyTeams)
+        setTeamData(res.data.MyTeams);
+
+        const teamNames = res.data.MyTeams.map(item => item.TeamName);
+        setOptions([...teamNames, "Create new Team"]);
+      } else {
+        alert(res.data.message);
+      }
+    } catch (error) {
+      console.error("Error fetching team data:", error);
+      alert("Error fetching team data. Please try again later.");
+    }
+    setLoading(false)
+  };
 
   useEffect(() => {
-    const fetchTeamData = async () => {
-      setLoading(true)
-      try {
-        const token = Cookies.get('access_token');
-        const headers = { Authorization: token };
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/project-management/get-teams`, { headers });
-
-        if (res.data.success === true) {
-          updateTeamData(res.data.MyTeams)
-          setTeamData(res.data.MyTeams);
-
-          const teamNames = res.data.MyTeams.map(item => item.TeamName);
-          setOptions([...teamNames, "Create new Team"]);
-        } else {
-          alert(res.data.message);
-        }
-      } catch (error) {
-        console.error("Error fetching team data:", error);
-        alert("Error fetching team data. Please try again later.");
-      }
-      setLoading(false)
-    };
 
     fetchTeamData();
   }, []);
+
+
+  useEffect(()=>{
+    socket.on('response-join-team', data=>{
+        fetchTeamData()
+    })   
+},[socket])
+
 
   return (
     <>
@@ -82,36 +92,42 @@ function Teams() {
       />
       {teamData ? (
         <>
-          {
-            teamData.map(item => {
-              //console.log(item)
-              return (<>
-                <Card style={{
-                  marginTop: "10px",
-                  marginBottom: "10px"
-                }}>
-                  <CardActionArea onClick={() => {
-                    navigate(`${item._id}`)
+
+          {teamData.length != 0 ? (<>
+            {
+              teamData.map(item => {
+                //console.log(item)
+                return (<>
+                  <Card style={{
+                    marginTop: "10px",
+                    marginBottom: "10px"
                   }}>
+                    <CardActionArea onClick={() => {
+                      navigate(`${item._id}`)
+                    }}>
 
-                    <CardMedia
-                      sx={{ height: 300 }}
-                      image={item.TeamBannerURL}
-                    />
-                    <CardContent>
-                      <Typography gutterBottom variant="h5" component="div">
-                        {item.TeamName}
-                      </Typography>
+                      <CardMedia
+                        sx={{ height: 300 }}
+                        image={item.TeamBannerURL}
+                      />
+                      <CardContent>
+                        <Typography gutterBottom variant="h5" component="div">
+                          {item.TeamName}
+                        </Typography>
 
-                    </CardContent>
-                  </CardActionArea>
-                </Card>
-              </>)
-            })
-          }
+                      </CardContent>
+                    </CardActionArea>
+                  </Card>
+                </>)
+              })
+            }
+
+          </>) : (<>No team found</>)}
+
+
         </>
       ) : (
-        <Typography>No teams found</Typography>
+        null
       )}
     </>
   );

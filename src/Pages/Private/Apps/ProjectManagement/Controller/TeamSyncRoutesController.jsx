@@ -6,6 +6,8 @@ import Boards from '../Boards/Boards';
 import Media from '../Media/Media';
 import TeamDescriptor from '../TeamDescriptor';
 import CreateTeam from '../CreateTeam/CreateTeam';
+import ChatWindow from '../Communications/ChatWindow/ChatWindow';
+import WhiteBoard from '../Boards/WhiteBoard';
 
 function TeamSyncRoutesController() {
   return (
@@ -21,7 +23,11 @@ function TeamSyncRoutesController() {
         
         
         <Route exact path='/communications' element={<Communications />}/>
+        <Route exact path='/communications/chats/:teamID' element={<ChatWindow />}/>
+        
         <Route exact path='/boards' element={<Boards />}/>
+        <Route exact path='/boards/:roomId' element={<WhiteBoard />}/>
+        
         <Route exact path='/media' element={<Media />}/>
         
     </Routes>

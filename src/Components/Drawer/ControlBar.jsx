@@ -105,7 +105,7 @@ export default function ControlBar({ children }) {
         <ListItem disablePadding>
           <ListItemButton
             onClick={() => {
-              navigate("/apps/project-management");
+              navigate("/apps/project-management/my-teams");
             }}
           >
             <ListItemText primary={"TeamSync"} secondary = {"Project Management Service"} style={{ textAlign: 'center' }}/>

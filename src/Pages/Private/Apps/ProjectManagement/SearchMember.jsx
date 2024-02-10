@@ -1,8 +1,16 @@
 import { Button, Card, CardActionArea, CardContent, TextField, Typography } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import Cookies from 'js-cookie';
+import { useSocket } from '../../../../Context/SocketProvider';
+import MySnackBar from '../../../../Components/Snakbar/MySnakBar';
+import MySnakBar from '../../../../Components/Snakbar/MySnakBar';
+import { useNotification } from '../../../../Context/NotificationProvider';
 
-function SearchMember() {
+function SearchMember(props) {
+
+    const {addNotification} = useNotification();
+    const socket = useSocket();
     const [search, setSearch] = useState('');
     const [searchResults, setSearchResults] = useState([]);
 
@@ -24,10 +32,8 @@ function SearchMember() {
         setSearch(searchQuery); // Update the search state
     };
 
-    const handleRequestJoinTeam = (user) => {
-        // Handle the request to join team for the selected user
-        console.log(`Requesting ${user.username} to join the team`);
-    };
+    
+
 
     return (
         <>
@@ -44,12 +50,20 @@ function SearchMember() {
                     <Typography variant="h6">Search Results:</Typography>
                     {searchResults.map((user) => (
                         
-                            <CardContent onClick={()=>{
-                                console.log("Requesting to join...")
-                            }} style={{
+                            <CardContent  style={{
                                 display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center", padding: ".5rem .75rem"
                             }}>{user.username}
-                                <Button>Request to Join</Button>
+                                <Button onClick={async()=>{
+                                    const token = Cookies.get('access_token');
+
+                                    const payload = {
+                                        token : token,
+                                        receiverID : user._id,
+                                        TeamID : props.TeamID
+                                    }
+                            
+                                   socket.emit('request-join-team', payload);
+                                }}>Request to Join</Button>
                             </CardContent>
                         
                     ))}

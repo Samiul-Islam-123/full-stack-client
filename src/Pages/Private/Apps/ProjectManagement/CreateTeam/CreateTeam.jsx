@@ -4,6 +4,7 @@ import React, { useState, useRef } from 'react';
 import axios from "axios";
 import CircularProgress from '@mui/material/CircularProgress';
 import Backdrop from '@mui/material/Backdrop';
+import { useNavigate } from 'react-router-dom';
 
 function CreateTeam() {
   const [bannerImage, setBannerImage] = useState(null);
@@ -12,6 +13,7 @@ function CreateTeam() {
     const [loading, setLoading] = useState(false);
   const [TeamName, setTeamName] = useState("");
   const [TeamDescription, setTeamDescription] = useState("");
+  const navigate = useNavigate();
   
 
   const handleBannerImageChange = (event) => {
@@ -38,7 +40,15 @@ function CreateTeam() {
 console.log(res)
     if(res.data.success === true)
     {
-        alert(res.data.Message);
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/project-management/create-chat-room`,{
+        TeamID : res.data.teamID
+      });
+      if(response.data.success === true)
+         navigate('/apps/project-management/my-teams')
+
+         else{
+          alert(response.data.message)
+         }
     }
 
     else{
