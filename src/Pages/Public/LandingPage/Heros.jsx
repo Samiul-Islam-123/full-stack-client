@@ -89,7 +89,7 @@ function Heros() {
                             <Button variant='outlined' style={{
                                 marginTop : "10px"
                             }} onClick={()=>{
-                                navigate('/apps/dashboard')
+                                navigate('/apps/project-management/my-teams')
                             }}>
                                 Get Started
                             </Button>

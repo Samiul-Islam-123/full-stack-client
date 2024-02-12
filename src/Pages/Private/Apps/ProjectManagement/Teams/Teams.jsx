@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import TeamBanner from './TeamBanner/TeamBanner';
 import TeamMembers from './TemMembers/TeamMembers';
 import Productivity from './Productivity/Productivity';
-import { TextField, Autocomplete, Typography, Card, CardMedia, CardContent, CardActionArea } from '@mui/material';
+import { TextField, Autocomplete, Typography, Card, CardMedia, CardContent, CardActionArea, Grid } from '@mui/material';
 import Cookies from "js-cookie";
 import axios from "axios";
 import { useNavigate } from "react-router-dom"
@@ -90,6 +90,9 @@ function Teams() {
         options={options}
         renderInput={(params) => <TextField {...params} label="Teams" />}
       />
+
+      <Grid container spacing={2}>
+
       {teamData ? (
         <>
 
@@ -98,10 +101,12 @@ function Teams() {
               teamData.map(item => {
                 //console.log(item)
                 return (<>
-                  <Card style={{
-                    marginTop: "10px",
-                    marginBottom: "10px"
-                  }}>
+                  
+                    <Grid item md = {4} sm={6} xs = {12}>
+                    <Card style={{
+                      marginTop: "10px",
+                      marginBottom: "10px"
+                    }}>
                     <CardActionArea onClick={() => {
                       navigate(`${item._id}`)
                     }}>
@@ -109,7 +114,7 @@ function Teams() {
                       <CardMedia
                         sx={{ height: 300 }}
                         image={item.TeamBannerURL}
-                      />
+                        />
                       <CardContent>
                         <Typography gutterBottom variant="h5" component="div">
                           {item.TeamName}
@@ -118,6 +123,7 @@ function Teams() {
                       </CardContent>
                     </CardActionArea>
                   </Card>
+                    </Grid>
                 </>)
               })
             }
@@ -128,7 +134,8 @@ function Teams() {
         </>
       ) : (
         null
-      )}
+        )}
+        </Grid>
     </>
   );
 }

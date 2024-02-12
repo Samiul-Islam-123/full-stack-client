@@ -20,16 +20,14 @@ function NavBar() {
     return (
         <>
             <Toolbar>
-                <ControlBar>
-                    <IconButton>
-                        <Icon>
-                            <DensityMediumIcon />
-                        </Icon>
-                    </IconButton>
-                </ControlBar>
 
-                <Typography variant='h4' style={{
-                    flexGrow: "0.96"
+                <Typography
+                 onClick={() => {
+                    navigate('/')
+                }}
+                variant='h4' style={{
+                    flexGrow: "0.96",
+                    cursor : "pointer"
                 }}>
                     TB
                 </Typography>
@@ -41,34 +39,18 @@ function NavBar() {
                 </Button>
 
                 <Button onClick={() => {
-                    navigate('/apps/dashboard')
+                    navigate('/apps/project-management/my-teams')
                 }}>
-                    Apps
+                    Dashboard
                 </Button>
 
-                <Button onClick={() => {
-                    navigate('/aboutus')
-                }}>
-                    About Us
-                </Button>
+               
 
-                <IconButton onClick={() => {
-                    navigate('/ai')
-                }}>
-                    <Icon>
-                        <AutoAwesomeIcon />
-                    </Icon>
-                </IconButton>
+               
 
 
 
-                <IconButton>
-                <Badge badgeContent={notifications.length} color='primary'>
-                    <Icon>
-                        <NotificationsIcon />
-                    </Icon>
-</Badge>
-                </IconButton>
+                
 
                 <IconButton onClick={() => {
                     navigate('/profile')
