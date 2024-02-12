@@ -72,7 +72,7 @@ function ChatWindow() {
     return (
         <>
             {
-                TeamData && userData ? (<>
+                (TeamData && userData) && (<>
                     <ChatHeader
                         TeamName={TeamData[0].TeamName}
                         imageURL={TeamData[0].TeamBannerURL}
@@ -80,7 +80,7 @@ function ChatWindow() {
                     />
                     <ChatBody myID={userData.user_id} teamID = {teamID}/>
                     <ChatFooter user_id = {userData.user_id} teamID = {teamID}/>
-                </>) : (<></>)
+                </>) 
             }
         </>
     )

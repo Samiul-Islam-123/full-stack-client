@@ -13,7 +13,8 @@ function TeamSyncRoutesController() {
   return (
     <>
     <div style={{
-        marginRight : "50px"
+        marginRight : "50px",
+        marginLeft: "50px"
     }}>
 
     <Routes>

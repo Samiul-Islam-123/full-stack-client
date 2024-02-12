@@ -21,7 +21,7 @@ function ChatFooter(props) {
     }
 
   return (
-    <div style={{ position: 'fixed', bottom: 10, left: 0, width: '90%', padding: '10px', marginLeft : "8%",borderTop: '0.5px solid #ccc' }}>
+    <div style={{  marginLeft : '10px', width: '100%', padding: '10px',borderTop: '0.5px solid #ccc' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
         <TextField
         onChange={(e)=>{
