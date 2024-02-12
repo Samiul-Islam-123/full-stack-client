@@ -3,10 +3,11 @@ import React, { useEffect, useState } from 'react';
 import io from 'socket.io-client';
 import Peer from 'peerjs';
 import { useParams } from 'react-router-dom';
+import { useSocket } from '../../../../Context/SocketProvider';
 
-const socket = io('http://localhost:5500');
 
 function MeetingScreen() {
+const socket = useSocket();
   const {id} = useParams();
   const [myPeer, setMyPeer] = useState(null);
   const [myStream, setMyStream] = useState(null);

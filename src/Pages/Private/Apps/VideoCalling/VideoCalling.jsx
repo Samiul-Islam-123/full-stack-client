@@ -1,10 +1,11 @@
 import { Button, Container, Grid, TextField, Typography } from '@mui/material';
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import socket from '../../../../Utils/Socket';
+import { useSocket } from '../../../../Context/SocketProvider';
 
 function VideoCalling() {
 
+  const socket = useSocket()
   const navigate = useNavigate();
   const [currentPhrase, setCurrentPhrase] = useState("Elevating connections with crystal-clear video magic. ")
   const [roomIdInput, setRoomIdInput] = useState(null);

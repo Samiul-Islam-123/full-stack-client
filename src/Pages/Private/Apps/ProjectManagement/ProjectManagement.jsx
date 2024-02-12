@@ -6,7 +6,7 @@ import TuneIcon from '@mui/icons-material/Tune';
 
 function ProjectManagement() {
 
-  const [collapseControllBar, setCollapseControllBar] = useState(false);
+  const [collapseControllBar, setCollapseControllBar] = useState(true);
 
   return (
     <>

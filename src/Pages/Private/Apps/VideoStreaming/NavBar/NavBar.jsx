@@ -20,9 +20,6 @@ const navigate = useNavigate();
                 navigate('my-video')
             }}>MY Videos</Button>
             <Button onClick={()=>{
-                navigate('liked-video')
-            }}>Liked Videos</Button>
-            <Button onClick={()=>{
                 navigate('upload-video')
             }}>Upload Video</Button>
             

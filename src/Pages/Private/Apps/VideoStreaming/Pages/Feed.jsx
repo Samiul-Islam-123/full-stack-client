@@ -36,6 +36,7 @@ fetchFeed();
             image={thumbnail.thumbnailURL}
             title={thumbnail.title}
             description={thumbnail.description}
+            ID = {thumbnail._id}
           />
         </Grid>
       ))}

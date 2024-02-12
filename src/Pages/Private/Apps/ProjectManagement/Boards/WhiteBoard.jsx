@@ -94,7 +94,7 @@ function WhiteBoard() {
     });
 
     socket.on('user-disconnected', (data) => {
-      alert(`${data} has left the room`);
+      setMessage(`${data.username} has left the room`)
     });
 
     socket.on('get-drawing', (data) => {
@@ -103,6 +103,7 @@ function WhiteBoard() {
     });
 
     socket.on('live-members', data=>{
+      console.log(data)
         setLiveCount(data.length)
     })
   }, [socket]);

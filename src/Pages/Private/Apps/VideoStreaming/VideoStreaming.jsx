@@ -5,6 +5,7 @@ import MyVideo from './Pages/MyVideo'
 import LikedVideos from './Pages/LikedVideos'
 import UploadVideo from './Pages/UploadVideo'
 import Feed from './Pages/Feed'
+import VideoPage from './Pages/VideoPage'
 
 function VideoStreaming() {
   const navigate = useNavigate();
@@ -24,6 +25,8 @@ function VideoStreaming() {
   <Route exact path='/my-video' element={<MyVideo />} />
   <Route exact path='/liked-video' element={<LikedVideos />} />
   <Route exact path='/upload-video' element={<UploadVideo />} />
+  <Route exact path='/stream/:videoID' element={<VideoPage />} />
+  
   
 </Routes>
 
